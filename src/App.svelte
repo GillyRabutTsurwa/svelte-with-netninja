@@ -1,13 +1,16 @@
 <script>
-  let name = "Yoshi";
+  let firstName = "Diddy";
+  let lastName = "Kong";
   let beltColour = "black";
-
-  const handleClick = () => {
-    beltColour == "black" ? (beltColour = "yellow") : (beltColour = "black");
-  };
-  const handleInput = e => {
-    beltColour = e.target.value;
-  };
+  //   NEW: REACTIVE VALUES;
+  $: fullName = `${firstName} ${lastName}`;
+  //   NEW: REACTIVE STATEMENTS run code reactively, not just watch for value changes:
+  $: console.log(beltColour);
+  //   NEW: CAN ALSO PUT REACTIVE IN CODE BLOCKS
+  $: {
+    console.log(beltColour);
+    console.log(fullName);
+  }
 </script>
 
 <style>
@@ -18,11 +21,20 @@
     margin: 0 auto;
   }
 
-  h1 {
+  h1,
+  h2 {
     color: #ff3e00;
     text-transform: uppercase;
+  }
+
+  h1 {
     font-size: 4em;
     font-weight: 100;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    font-weight: 300;
   }
 
   @media (min-width: 640px) {
@@ -36,15 +48,10 @@
 </style>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <h2>This will cover videos 1-4</h2>
-  <p style="color: {beltColour}">{beltColour} belt</p>
-  <button on:click={handleClick}>Toggle Belt Colour</button>
-  <!-- NOTE: Below input does one way binding, will comment out and leave as reference -->
-  <!-- <input type="text" on:input={handleInput} /> -->
-  <!-- NOTE: Below input does two way binding, will comment out and leave as reference -->
-  <!-- <input type="text" on:input={handleInput} value={beltColour} /> -->
-  <!-- NOTE: Below input is the shorthand two way binding for the very one above -->
-  <!-- bind:property. This is alot like v-bind in vue -->
+  <h1>Reactive Values</h1>
+  <h2>Reactive Values & Reactive Statements</h2>
+  <p>{fullName} - {beltColour} belt</p>
+  <input type="text" bind:value={firstName} />
+  <input type="text" bind:value={lastName} />
   <input type="text" bind:value={beltColour} />
 </main>
