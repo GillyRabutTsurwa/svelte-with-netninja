@@ -1,16 +1,19 @@
 <script>
-  let firstName = "Diddy";
-  let lastName = "Kong";
-  let beltColour = "black";
-  //   NEW: REACTIVE VALUES;
-  $: fullName = `${firstName} ${lastName}`;
-  //   NEW: REACTIVE STATEMENTS run code reactively, not just watch for value changes:
-  $: console.log(beltColour);
-  //   NEW: CAN ALSO PUT REACTIVE IN CODE BLOCKS
-  $: {
-    console.log(beltColour);
-    console.log(fullName);
-  }
+  let people = [
+    { name: "Yoshi", colourBelt: "black", age: 25, id: 1 },
+    { name: "Mario", colourBelt: "orange", age: 45, id: 2 },
+    { name: "Luigi", colourBelt: "brown", age: 35, id: 3 },
+    { name: "Peach", colourBelt: "brown", age: 35, id: 4 },
+    { name: "Daisy", colourBelt: "brown", age: 35, id: 5 },
+    { name: "Browser", colourBelt: "brown", age: 35, id: 6 },
+    { name: "Toad", colourBelt: "brown", age: 35, id: 7 }
+  ];
+
+  const handleDelete = (e, id) => {
+    console.log(e);
+    // delete the current person from the people array
+    people = people.filter(currentPerson => currentPerson.id != id);
+  };
 </script>
 
 <style>
@@ -19,6 +22,7 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
+    min-height: 5000px;
   }
 
   h1,
@@ -41,17 +45,46 @@
     main {
       max-width: none;
     }
-    input:focus {
-      outline: none;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .loop-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .loop-div > * {
+      margin-right: 10px;
     }
   }
 </style>
 
 <main>
-  <h1>Reactive Values</h1>
-  <h2>Reactive Values & Reactive Statements</h2>
-  <p>{fullName} - {beltColour} belt</p>
-  <input type="text" bind:value={firstName} />
-  <input type="text" bind:value={lastName} />
-  <input type="text" bind:value={beltColour} />
+  <h1>Loops</h1>
+  <h2>How to do loops in svelte</h2>
+  <div class="container">
+    <!-- How to make a loop in Svelte -->
+    <!-- #each ARRAYNAME as ITERATORVARIABLE -->
+    <!-- takes a KEY, just like vue. It is taken as parantheses -->
+    {#each people as currentPerson (currentPerson.id)}
+      <div class="loop-div">
+        <h4>{currentPerson.name}</h4>
+        <p>{currentPerson.age} years old</p>
+        <strong>{currentPerson.colourBelt}</strong>
+      </div>
+    {:else}
+      <p>
+        Il n'y a personnne pour afficher. Didn't know you could use this in each
+        blocks.
+      </p>
+    {/each}
+  </div>
+
+  <p>
+    <em>Styling is terrible. Allow me</em>
+  </p>
 </main>
