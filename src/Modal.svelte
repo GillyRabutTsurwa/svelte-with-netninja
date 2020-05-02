@@ -1,9 +1,6 @@
 <script>
-  // NEW: HOW TO ACCESS A PROP FROM THE PARENT
-  // Think of it as the props object property in Vue. Just way different syntaxe
-  export let messageProp;
   let showModal = true;
-  export let isPromo = false;
+  let isPromo = true;
 </script>
 
 <style>
@@ -32,7 +29,7 @@
   <!-- Just like vue. we will get the class promo if isPromo is true -->
   <div class="modal" class:promo={isPromo}>
     <div class="modal__content">
-      <p>{messageProp}</p>
+      <p>Sign Up for Offers</p>
     </div>
   </div>
 {/if}

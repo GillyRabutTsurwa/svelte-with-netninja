@@ -74,7 +74,7 @@
 </style>
 
 <main>
-  <Modal messageProp="I am a prop value" isPromo={true} />
+  <Modal />
   <div class="container">
     {#each people as currentPerson (currentPerson.id)}
       <div class="loop-div">
