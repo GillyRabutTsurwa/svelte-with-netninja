@@ -14,6 +14,9 @@
     // delete the current person from the people array
     people = people.filter(currentPerson => currentPerson.id != id);
   };
+
+  let num = 0;
+  const increment = () => num++;
 </script>
 
 <style>
@@ -22,11 +25,11 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
-    min-height: 5000px;
   }
 
   h1,
-  h2 {
+  h2,
+  h3 {
     color: #ff3e00;
     text-transform: uppercase;
   }
@@ -39,6 +42,11 @@
   h2 {
     font-size: 1.5em;
     font-weight: 300;
+  }
+
+  h3 {
+    font-size: 1em;
+    font-weight: 500;
   }
 
   @media (min-width: 640px) {
@@ -54,6 +62,7 @@
 
     .loop-div {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -64,17 +73,25 @@
 </style>
 
 <main>
-  <h1>Loops</h1>
-  <h2>How to do loops in svelte</h2>
+  <h1>Conditionals</h1>
+  <h2>If Statements in Svelte</h2>
+  <h3>We're using the array loop section from previous lessonss</h3>
   <div class="container">
     <!-- How to make a loop in Svelte -->
     <!-- #each ARRAYNAME as ITERATORVARIABLE -->
     <!-- takes a KEY, just like vue. It is taken as parantheses -->
     {#each people as currentPerson (currentPerson.id)}
       <div class="loop-div">
-        <h4>{currentPerson.name}</h4>
-        <p>{currentPerson.age} years old</p>
-        <strong>{currentPerson.colourBelt}</strong>
+        <div class="loop-div__info">
+          <h4>{currentPerson.name}</h4>
+          <p>{currentPerson.age} years old</p>
+          <p>{currentPerson.colourBelt}</p>
+        </div>
+        <div class="loop-div__conditional">
+          {#if currentPerson.colourBelt === 'black'}
+            <strong>Master Ninja</strong>
+          {/if}
+        </div>
         <button
           on:click={e => {
             handleDelete(e, currentPerson.id);
@@ -94,4 +111,14 @@
   <p>
     <em>Styling is terrible. Allow me</em>
   </p>
+
+  <hr />
+
+  <button on:click={increment}>Increment</button>
+  <span>{num}</span>
+  {#if num >= 20}
+    <p>You've reached 20</p>
+  {:else if num == 10}
+    <p>Halfway there</p>
+  {/if}
 </main>
