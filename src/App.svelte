@@ -75,6 +75,13 @@
         <h4>{currentPerson.name}</h4>
         <p>{currentPerson.age} years old</p>
         <strong>{currentPerson.colourBelt}</strong>
+        <button
+          on:click={e => {
+            handleDelete(e, currentPerson.id);
+          }}
+          class="delete">
+          Delete
+        </button>
       </div>
     {:else}
       <p>
