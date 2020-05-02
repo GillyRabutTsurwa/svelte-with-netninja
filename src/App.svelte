@@ -1,4 +1,5 @@
 <script>
+  import Modal from "./Modal.svelte";
   let people = [
     { name: "Yoshi", colourBelt: "black", age: 25, id: 1 },
     { name: "Mario", colourBelt: "orange", age: 45, id: 2 },
@@ -22,9 +23,9 @@
 <style>
   main {
     text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
+    /* max-width: 240px; */
+    width: 100%;
+    /* margin: 0 auto; */
   }
 
   h1,
@@ -73,13 +74,8 @@
 </style>
 
 <main>
-  <h1>Conditionals</h1>
-  <h2>If Statements in Svelte</h2>
-  <h3>We're using the array loop section from previous lessonss</h3>
+  <Modal messageProp="I am a prop value" isPromo={true} />
   <div class="container">
-    <!-- How to make a loop in Svelte -->
-    <!-- #each ARRAYNAME as ITERATORVARIABLE -->
-    <!-- takes a KEY, just like vue. It is taken as parantheses -->
     {#each people as currentPerson (currentPerson.id)}
       <div class="loop-div">
         <div class="loop-div__info">
