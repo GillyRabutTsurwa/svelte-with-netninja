@@ -1,8 +1,6 @@
 <script>
-  // NEW: HOW TO ACCESS A PROP FROM THE PARENT
-  // Think of it as the props object property in Vue. Just way different syntaxe
   export let messageProp;
-  let showModal = true;
+  export let showModalProp = false;
   export let isPromo = false;
 </script>
 
@@ -28,9 +26,9 @@
   }
 </style>
 
-{#if showModal}
-  <!-- Just like vue. we will get the class promo if isPromo is true -->
-  <div class="modal" class:promo={isPromo}>
+{#if showModalProp}
+  <!-- NOTE: For event forwarding from parent to child, we make a click event that does not do anything...In Vue, we use the this.$emit(). Much simpler in Svelte, mais ça va prendre des temps pour m'habituer -->
+  <div class="modal" class:promo={isPromo} on:click>
     <div class="modal__content">
       <p>{messageProp}</p>
     </div>

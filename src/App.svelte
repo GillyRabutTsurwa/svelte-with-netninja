@@ -1,4 +1,7 @@
 <script>
+  import Modal from "./Modal.svelte";
+  let showModal = false;
+
   let people = [
     { name: "Yoshi", colourBelt: "black", age: 25, id: 1 },
     { name: "Mario", colourBelt: "orange", age: 45, id: 2 },
@@ -11,12 +14,15 @@
 
   const handleDelete = (e, id) => {
     console.log(e);
-    // delete the current person from the people array
     people = people.filter(currentPerson => currentPerson.id != id);
   };
 
   let num = 0;
   const increment = () => num++;
+
+  const toggleModal = () => {
+    showModal = !showModal;
+  };
 </script>
 
 <style>
@@ -69,17 +75,20 @@
     .loop-div > * {
       margin-right: 10px;
     }
+    button {
+      cursor: pointer;
+    }
   }
 </style>
 
+<!-- NOTE: the click listener in the modal component is the event emitted up from the child component (same way an event is emitted up to the parent in vue). Here where the child component is defined, we simply initiate a click listener. Easy. -->
+<Modal
+  messageProp="We are learning Event Fowarding"
+  showModalProp={showModal}
+  on:click={toggleModal} />
 <main>
-  <h1>Conditionals</h1>
-  <h2>If Statements in Svelte</h2>
-  <h3>We're using the array loop section from previous lessonss</h3>
+  <button on:click={toggleModal}>Open Modal</button>
   <div class="container">
-    <!-- How to make a loop in Svelte -->
-    <!-- #each ARRAYNAME as ITERATORVARIABLE -->
-    <!-- takes a KEY, just like vue. It is taken as parantheses -->
     {#each people as currentPerson (currentPerson.id)}
       <div class="loop-div">
         <div class="loop-div__info">
