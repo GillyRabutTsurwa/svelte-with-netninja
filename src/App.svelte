@@ -82,10 +82,15 @@
 </style>
 
 <!-- NOTE: the click listener in the modal component is the event emitted up from the child component (same way an event is emitted up to the parent in vue). Here where the child component is defined, we simply initiate a click listener. Easy. -->
-<Modal
-  messageProp="We are learning Event Fowarding"
-  showModalProp={showModal}
-  on:click={toggleModal} />
+<Modal showModalProp={showModal} on:click={toggleModal}>
+  <h3 slot="title">Add a New Person Pinchi</h3>
+  <form>
+    <input type="text" placeholder="name" />
+    <input type="text" placeholder="belt colour" />
+    <button>Add Person</button>
+  </form>
+
+</Modal>
 <main>
   <button on:click={toggleModal}>Open Modal</button>
   <div class="container">

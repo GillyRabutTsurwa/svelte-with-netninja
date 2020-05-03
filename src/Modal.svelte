@@ -6,7 +6,6 @@
    *
    **/
 
-  export let messageProp;
   export let showModalProp = false;
   export let isPromo = false;
 </script>
@@ -37,7 +36,9 @@
   <!-- NOTE: How to use the event modifier: eventToListen|eventModifier -->
   <div class="modal" class:promo={isPromo} on:click|self>
     <div class="modal__content">
-      <p>{messageProp}</p>
+      <!-- NEW: slots, just like in Vue. Same with named slots. Useful for passing blocks of HTML within a component -->
+      <slot name="title" />
+      <slot />
     </div>
   </div>
 {/if}
