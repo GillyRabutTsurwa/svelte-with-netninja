@@ -1,4 +1,11 @@
 <script>
+  /** NEW: EVENT MODIFIERS: Voici quelques examples
+   * once = l'evenement ne sera lancé qu'une fois (removes handler after)
+   * preventDefault = empêche le comportement defaut. (comme e.preventDefault())
+   * self = l'evenement ne sera lancé qu'à l'élément cliqué.
+   *
+   **/
+
   export let messageProp;
   export let showModalProp = false;
   export let isPromo = false;
@@ -27,8 +34,8 @@
 </style>
 
 {#if showModalProp}
-  <!-- NOTE: For event forwarding from parent to child, we make a click event that does not do anything...In Vue, we use the this.$emit(). Much simpler in Svelte, mais ça va prendre des temps pour m'habituer -->
-  <div class="modal" class:promo={isPromo} on:click>
+  <!-- NOTE: How to use the event modifier: eventToListen|eventModifier -->
+  <div class="modal" class:promo={isPromo} on:click|self>
     <div class="modal__content">
       <p>{messageProp}</p>
     </div>
