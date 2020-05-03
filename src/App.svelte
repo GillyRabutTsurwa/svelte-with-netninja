@@ -89,7 +89,6 @@
     <input type="text" placeholder="belt colour" />
     <button>Add Person</button>
   </form>
-
 </Modal>
 <main>
   <button on:click={toggleModal}>Open Modal</button>
