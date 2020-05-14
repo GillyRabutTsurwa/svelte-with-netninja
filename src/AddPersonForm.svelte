@@ -8,13 +8,18 @@
 </script>
 
 <style>
-
+  button {
+    cursor: pointer;
+  }
 </style>
 
-<!-- NOTE: on:submit|preventDefault is just like e.preventDefault in vanilla -->
+<!-- NOTE: on:submit|preventDefault is just like e.preventDefault() in vanilla -->
+<!-- NOTE: Prolly the most used event modifier for forms -->
 <form on:submit|preventDefault={handleSubmit}>
-  <input type="text" placeholder="name" bind:value={name} />
-  <input type="text" placeholder="belt colour" bind:value={beltColour} />
-  <input type="number" placeholder="age" bind:value={age} />
+  <div class="inputs">
+    <input type="text" placeholder="Name" bind:value={name} />
+    <input type="text" placeholder="Belt Colour" bind:value={beltColour} />
+    <input type="number" placeholder="Age" bind:value={age} />
+  </div>
   <button>Add Person</button>
 </form>
