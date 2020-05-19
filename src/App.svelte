@@ -3,11 +3,12 @@
   let beltColour = "black";
 
   const handleClick = () => {
-    beltColour == "black" ? (beltColour = "yellow") : (beltColour = "black");
+    beltColour == "black" ? (beltColour = "brown") : (beltColour = "black");
   };
-  const handleInput = e => {
-    beltColour = e.target.value;
-  };
+  //NOTE: not using this. works for the ways that are commented out
+  // const handleInput = e => {
+  //   beltColour = e.target.value;
+  // };
 </script>
 
 <style>
@@ -38,6 +39,7 @@
 <main>
   <h1>Hello {name}!</h1>
   <h2>This will cover videos 1-4</h2>
+  <!-- NOTE: below is the same as v-bind:style="{color: beltColour} in Vue -->
   <p style="color: {beltColour}">{beltColour} belt</p>
   <button on:click={handleClick}>Toggle Belt Colour</button>
   <!-- NOTE: Below input does one way binding, will comment out and leave as reference -->
