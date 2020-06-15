@@ -1,11 +1,4 @@
 <script>
-  /** NEW: EVENT MODIFIERS: Voici quelques examples
-   * once = l'evenement ne sera lancé qu'une fois (removes handler after)
-   * preventDefault = empêche le comportement defaut. (comme e.preventDefault())
-   * self = l'evenement ne sera lancé qu'à l'élément cliqué.
-   *
-   **/
-
   export let showModalProp = false;
   export let isPromo = false;
 </script>
@@ -36,7 +29,6 @@
   <!-- NOTE: How to use the event modifier: eventToListen|eventModifier -->
   <div class="modal" class:promo={isPromo} on:click|self>
     <div class="modal__content">
-      <!-- NEW: slots, just like in Vue. Same with named slots. Useful for passing blocks of HTML within a component -->
       <slot name="title" />
       <slot />
     </div>

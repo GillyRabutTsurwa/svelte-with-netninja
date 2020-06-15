@@ -2,15 +2,16 @@
   import Modal from "./Modal.svelte";
   import AddPersonForm from "./AddPersonForm.svelte";
   let showModal = false;
+  let skills = [];
 
   let people = [
-    { name: "Yoshi", colourBelt: "black", age: 25, id: 1 },
-    { name: "Mario", colourBelt: "orange", age: 45, id: 2 },
-    { name: "Luigi", colourBelt: "brown", age: 35, id: 3 },
-    { name: "Peach", colourBelt: "brown", age: 35, id: 4 },
-    { name: "Daisy", colourBelt: "brown", age: 35, id: 5 },
-    { name: "Browser", colourBelt: "brown", age: 35, id: 6 },
-    { name: "Toad", colourBelt: "brown", age: 35, id: 7 }
+    { name: "Yoshi", beltColour: "black", age: 25, id: 1 },
+    { name: "Mario", beltColour: "orange", age: 45, id: 2 },
+    { name: "Luigi", beltColour: "brown", age: 35, id: 3 },
+    { name: "Peach", beltColour: "brown", age: 35, id: 4 },
+    { name: "Daisy", beltColour: "brown", age: 35, id: 5 },
+    { name: "Browser", beltColour: "brown", age: 35, id: 6 },
+    { name: "Toad", beltColour: "brown", age: 35, id: 7 }
   ];
 
   const handleDelete = (e, id) => {
@@ -23,6 +24,16 @@
 
   const toggleModal = () => {
     showModal = !showModal;
+  };
+  // The method that references the dispatch event ie. the method that will have access to all our information (through the e parametre, specifically e.detail) so that we can use and manipulate that data however we want
+  const addPerson = e => {
+    console.log(e);
+    console.log(e.detail);
+    let newPerson = e.detail;
+    people = [...people, newPerson];
+    // skills = e.detail.skills;
+    console.log(people);
+    showModal = false;
   };
 </script>
 
@@ -84,7 +95,8 @@
 
 <!-- NOTE: the click listener in the modal component is the event emitted up from the child component (same way an event is emitted up to the parent in vue). Here where the child component is defined, we simply initiate a click listener. Easy. -->
 <Modal showModalProp={showModal} on:click={toggleModal}>
-  <AddPersonForm />
+  <!-- NEW: listening to the event dispatch from the child -->
+  <AddPersonForm on:addPerson={addPerson} />
 </Modal>
 <main>
   <button on:click={toggleModal}>Open Modal</button>
@@ -94,11 +106,19 @@
         <div class="loop-div__info">
           <h4>{currentPerson.name}</h4>
           <p>{currentPerson.age} years old</p>
-          <p>{currentPerson.colourBelt}</p>
+          <p>{currentPerson.beltColour}</p>
         </div>
         <div class="loop-div__conditional">
-          {#if currentPerson.colourBelt === 'black'}
+          {#if currentPerson.beltColour === 'black'}
             <strong>Master Ninja</strong>
+          {/if}
+        </div>
+        <!-- NEW: -->
+        <div class="loop-div__skills">
+          {#if currentPerson.skills}
+            {#each currentPerson.skills as currentSkill}
+              <p>{currentSkill}</p>
+            {/each}
           {/if}
         </div>
         <button
