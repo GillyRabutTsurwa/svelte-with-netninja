@@ -1,5 +1,5 @@
 <script>
-  let name = "Yoshi";
+  let name = "Svelte";
   let beltColour = "black";
 
   const handleClick = () => {
@@ -37,7 +37,10 @@
 </style>
 
 <main>
-  <h1>Hello {name}!</h1>
+  <h1>
+    Bonjour, venant de
+    <strong>{name}</strong>
+  </h1>
   <h2>This will cover videos 1-4</h2>
   <!-- NOTE: below is the same as v-bind:style="{color: beltColour} in Vue -->
   <p style="color: {beltColour}">{beltColour} belt</p>
