@@ -1,9 +1,11 @@
 <script>
   import Tete from "./components/Header.svelte";
-  import PollForm from "./components/PollForm.svelte";
-  import PollDetails from "./components/PollDetails.svelte";
-  import PollList from "./components/PollList.svelte";
   import Pied from "./components/Footer.svelte";
+  import Tabs from "./components/shared/Tabs.svelte";
+
+  // tabs
+  let items = ["Current Polls", "Add New Poll"];
+  let activeItem = "Current Polls";
 </script>
 
 <style>
@@ -13,6 +15,8 @@
 </style>
 
 <main>
+  <h2>STOPPED AT 5:55</h2>
   <Tete />
+  <Tabs itemsProp={items} activeItemProp={activeItem} />
   <Pied />
 </main>
