@@ -1,2 +1,1 @@
-In this B version, I tried to use dynamic components instead of if statements.
-I like it.
+Poll Form component was done in this one. Pretty straightforward.
