@@ -17,5 +17,5 @@
 </style>
 
 <footer class="footer">
-  <div class="footer__copyright">Copyriht &copy; 2020 Poll Ninja</div>
+  <div class="footer__copyright">Copyright &copy; 2020 Poll Ninja</div>
 </footer>

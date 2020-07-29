@@ -12,7 +12,7 @@
     text-align: center;
   }
   .logo {
-    height: 4rem;
+    height: 6rem;
   }
 </style>
 
