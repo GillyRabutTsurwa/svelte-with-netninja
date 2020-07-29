@@ -6,6 +6,4 @@
 
 </style>
 
-<main>
-  <h1>Soon to be PollList Component</h1>
-</main>
+<h1>Soon to be PollList Component</h1>
