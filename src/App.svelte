@@ -36,7 +36,6 @@
     itemsProp={items}
     activeItemProp={activeItem}
     on:tabChange={changeTab} />
-  <!-- NEW: Dynamic component to render appropriate component -->
   <svelte:component this={changeCompo()} />
   <Pied />
 </main>
