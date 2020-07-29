@@ -9,10 +9,18 @@
   let items = ["Current Polls", "Add New Poll"];
   let activeItem = "Current Polls";
 
+  // function that runs when event emisson from child to parent is called
   const changeTab = e => {
     activeItem = e.detail;
     console.log(e.detail);
   };
+
+  //NEW:
+  let component;
+  function changeCompo() {
+    activeItem === items[0] ? (component = PollList) : (component = PollForm);
+    return component;
+  }
 </script>
 
 <style>
@@ -28,10 +36,7 @@
     itemsProp={items}
     activeItemProp={activeItem}
     on:tabChange={changeTab} />
-  {#if activeItem === 'Current Polls'}
-    <PollList />
-  {:else if activeItem === 'Add New Poll'}
-    <PollForm />
-  {/if}
+  <!-- NEW: Dynamic component to render appropriate component -->
+  <svelte:component this={changeCompo()} />
   <Pied />
 </main>
