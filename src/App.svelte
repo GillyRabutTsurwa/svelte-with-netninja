@@ -15,10 +15,11 @@
     console.log(e.detail);
   };
 
-  //NEW:
   let component;
   function changeCompo() {
-    activeItem === items[0] ? (component = PollList) : (component = PollForm);
+    activeItem === "Current Polls"
+      ? (component = PollList)
+      : (component = PollForm);
     return component;
   }
 </script>
