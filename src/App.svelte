@@ -16,18 +16,14 @@
   };
 
   let component;
-  function changeCompo() {
-    activeItem === "Current Polls"
-      ? (component = PollList)
-      : (component = PollForm);
-    return component;
-  }
+  $: activeItem === "Current Polls"
+    ? (component = PollList)
+    : (component = PollForm);
 </script>
 
 <style>
   main {
-    /* max-width: 96rem; */
-    /* margin: 0 auto; */
+    /* STYLES COMING SOO */
   }
 </style>
 
@@ -38,6 +34,6 @@
     activeItemProp={activeItem}
     on:tabChange={changeTab} />
   <!-- NEW: Dynamic component to render appropriate component -->
-  <svelte:component this={changeCompo()} />
+  <svelte:component this={component} />
   <Pied />
 </main>
