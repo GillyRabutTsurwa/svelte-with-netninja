@@ -13,7 +13,7 @@
   let polls = [
     {
       id: 1,
-      question: "Python or Javascript",
+      question: "Python or Javascript?",
       answerA: "Python",
       answerB: "Javascript",
       votesA: 9,
