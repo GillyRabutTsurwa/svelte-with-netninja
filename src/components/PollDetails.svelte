@@ -1,15 +1,16 @@
 <script>
-  //NEW:
   import { createEventDispatcher } from "svelte";
   import Card from "./shared/Card.svelte";
   export let singlePollProp;
 
   const dispatch = createEventDispatcher();
 
-  // Reactive Value.
+  // Reactive Values.
   $: totalVotes = singlePollProp.votesA + singlePollProp.votesB;
+  //NEW: percentage values for A & B;
+  $: percentA = Math.floor((100 / totalVotes) * singlePollProp.votesA);
+  $: percentB = Math.floor((100 / totalVotes) * singlePollProp.votesB);
 
-  //NEW: handling votes
   const handleVote = (option, id) => {
     dispatch("vote", {
       option: option,
@@ -42,6 +43,21 @@
     display: inline-block;
     padding: 1rem 2rem;
   }
+  .percent {
+    position: absolute;
+    height: 100%;
+  }
+
+  .percent-A {
+    background-color: rgba(217, 27, 66, 0.2);
+    border-left: 4px solid #d91b42;
+  }
+
+  .percent-B {
+    background-color: rgba(69, 196, 150, 0.2);
+    border-left: 4px solid #45c496;
+    /* background-color: rgba(69, 196, 66, 0.2); lequel est meilleur? */
+  }
 </style>
 
 <!-- NEW: -->
@@ -50,11 +66,11 @@
     <h3>{singlePollProp.question}</h3>
     <p>Total votes: {totalVotes}</p>
     <div on:click={() => handleVote('A', singlePollProp.id)} class="answer">
-      <div class="percent percent-A" />
+      <div class="percent percent-A" style="width: {percentA}%" />
       <span>{singlePollProp.answerA} ({singlePollProp.votesA})</span>
     </div>
     <div on:click={() => handleVote('B', singlePollProp.id)} class="answer">
-      <div class="percent percent-B" />
+      <div class="percent percent-B" style="width: {percentB}%" />
       <span>{singlePollProp.answerB} ({singlePollProp.votesB})</span>
     </div>
   </div>
