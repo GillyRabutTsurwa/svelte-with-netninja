@@ -8,23 +8,10 @@
   let items = ["Current Polls", "Add New Poll"];
   let activeItem = "Current Polls";
 
-  //NOTE: On l'utilise plus
-  // let polls = [
-  //   {
-  //     id: 1,
-  //     question: "Python or Javascript?",
-  //     answerA: "Python",
-  //     answerB: "Javascript",
-  //     votesA: 9,
-  //     votesB: 15
-  //   }
-  // ];
-
-  //NEW:
   const handleAdd = e => {
     console.log(e.detail);
     const newPoll = e.detail;
-    polls = [newPoll, ...polls]; //* NOTE: The issue is here with the store
+    polls = [newPoll, ...polls]; //* NOTE: polls n'existe plus, et on a pas mis a jour ce composant pour utiliser le store.
     console.log(polls);
     activeItem = "Current Polls";
   };
@@ -43,7 +30,7 @@
   const handleVote = e => {
     const { id, option } = e.detail;
 
-    let copiedPolls = [...polls]; // Same issue as before, on l'utilise plus polls
+    let copiedPolls = [...polls]; // NOTE: Hiyo shida fulani iko hapa pia.
     let upVotedPoll = copiedPolls.find(currentPoll => currentPoll.id === id);
 
     if (option === "A") {
@@ -68,6 +55,7 @@
     itemsProp={items}
     activeItemProp={activeItem}
     on:tabChange={changeTab} />
+  <!-- NEW: we removed the pollsProp prop and it will no longer be passing down the polls array down to the PollsList component  -->
   <svelte:component this={component} on:add={handleAdd} on:vote={handleVote} />
   <Pied />
 </main>
