@@ -1,14 +1,25 @@
 <script>
-  //NEW: Importing our store.
+  //NEW: lifecycle hooks, unlike in Vue, need to be imported
+  import { onMount, onDestroy } from "svelte";
   import PollStore from "../store/PollStore.js";
   import PollDetails from "./PollDetails.svelte";
   export let pollsProp = [];
 
-  // NEW: Calling our store to use
-  // NEW: data is the state "data that is in our store", in our case, the array. look at Pollstore.js
-  PollStore.subscribe(data => {
+  // unsubscribe from store. by putting variable. Will come back to this branch and write better notes
+  const callToUnsub = PollStore.subscribe(data => {
     pollsProp = data;
     console.log(data);
+  });
+
+  //NEW: lifecycle hooks. more info on theme here https://svelte.dev/tutorial/onmount
+
+  onMount(() => {
+    console.log("PollList component est monté");
+  });
+
+  onDestroy(() => {
+    console.log("PollList component est enlevé de DOM");
+    callToUnsub();
   });
 </script>
 
