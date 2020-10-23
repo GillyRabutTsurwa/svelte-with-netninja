@@ -6,8 +6,12 @@
   // IMPORTANTNOTE:Puisque ce composant ne prend plus le prop de son parent (App), je vais enlever le mot-clé export et changer le nom de pollsProp à polls
   export let polls = [];
 
-  // NEW: Calling our store to use
-  // NEW: data is the state "data that is in our store", in our case, the array. look at Pollstore.js
+  /** NOTE:
+   * This is how we access the data in our store:
+   * {storeName}.subscribe() takes a callback function in which our store data can be accessed.
+   * We simply pass the data arguement, (maybe we can call it whatever. sijui) on the callback.
+   * data is like the state "data that is in our store", in our case, the array. look at Pollstore.js
+   */
   PollStore.subscribe(data => {
     polls = data;
     console.log(data);
