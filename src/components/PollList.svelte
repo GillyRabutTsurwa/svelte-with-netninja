@@ -3,11 +3,12 @@
   import { onMount, onDestroy } from "svelte";
   import PollStore from "../store/PollStore.js";
   import PollDetails from "./PollDetails.svelte";
-  export let pollsProp = [];
+
+  export let polls = [];
 
   // unsubscribe from store. by putting variable. Will come back to this branch and write better notes
   const callToUnsub = PollStore.subscribe(data => {
-    pollsProp = data;
+    polls = data;
     console.log(data);
   });
 
@@ -33,7 +34,7 @@
 </style>
 
 <div class="poll-list">
-  {#each pollsProp as currentPoll (currentPoll.id)}
+  {#each polls as currentPoll (currentPoll.id)}
     <div>
       <!-- NEWIMPORTANT: En ne définant une fonctionne pour on:vote, cet evenement est transferer a son parent. Ce que l'on veut.  -->
       <!-- Ce composant est le liason de transferer des données spécifiques de son componsant enfant vers son composant parent. Car en peut pas faire directement (on n'utilise pas encore le store) -->
