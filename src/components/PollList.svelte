@@ -1,6 +1,15 @@
 <script>
+  //NEW: Importing our store.
+  import PollStore from "../store/PollStore.js";
   import PollDetails from "./PollDetails.svelte";
   export let pollsProp = [];
+
+  // NEW: Calling our store to use
+  // NEW: data is the state "data that is in our store", in our case, the array. look at Pollstore.js
+  PollStore.subscribe(data => {
+    pollsProp = data;
+    console.log(data);
+  });
 </script>
 
 <style>

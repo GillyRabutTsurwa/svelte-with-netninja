@@ -5,33 +5,30 @@
   import PollForm from "./components/PollForm.svelte";
   import PollList from "./components/PollList.svelte";
 
-  // tabs
   let items = ["Current Polls", "Add New Poll"];
   let activeItem = "Current Polls";
 
-  //NEW:
-  let polls = [
-    {
-      id: 1,
-      question: "Python or Javascript?",
-      answerA: "Python",
-      answerB: "Javascript",
-      votesA: 9,
-      votesB: 15
-    }
-  ];
+  //NOTE: On l'utilise plus
+  // let polls = [
+  //   {
+  //     id: 1,
+  //     question: "Python or Javascript?",
+  //     answerA: "Python",
+  //     answerB: "Javascript",
+  //     votesA: 9,
+  //     votesB: 15
+  //   }
+  // ];
 
   //NEW:
   const handleAdd = e => {
     console.log(e.detail);
     const newPoll = e.detail;
-    polls = [newPoll, ...polls]; //Using the spread operator. Niceee.
+    polls = [newPoll, ...polls]; //* NOTE: The issue is here with the store
     console.log(polls);
-    // Ca va switcher vers le current polls juste apres avoir soumis notre form.
     activeItem = "Current Polls";
   };
 
-  // function that runs when event emisson from child to parent is called
   const changeTab = e => {
     activeItem = e.detail;
     console.log(e.detail);
@@ -44,20 +41,17 @@
 
   // NEW:
   const handleVote = e => {
-    const { id, option } = e.detail; // on utilise la destrucutration des objets ici.
+    const { id, option } = e.detail;
 
-    let copiedPolls = [...polls];
-    // target selected poll
+    let copiedPolls = [...polls]; // Same issue as before, on l'utilise plus polls
     let upVotedPoll = copiedPolls.find(currentPoll => currentPoll.id === id);
 
-    //update selected poll
     if (option === "A") {
       upVotedPoll.votesA++;
     } else if (option === "B") {
       upVotedPoll.votesB++;
     }
 
-    // reassign polls to updated polls.
     polls = copiedPolls;
   };
 </script>
@@ -74,10 +68,6 @@
     itemsProp={items}
     activeItemProp={activeItem}
     on:tabChange={changeTab} />
-  <svelte:component
-    this={component}
-    on:add={handleAdd}
-    pollsProp={polls}
-    on:vote={handleVote} />
+  <svelte:component this={component} on:add={handleAdd} on:vote={handleVote} />
   <Pied />
 </main>
