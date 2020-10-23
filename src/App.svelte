@@ -8,23 +8,10 @@
   let items = ["Current Polls", "Add New Poll"];
   let activeItem = "Current Polls";
 
-  //NOTE: On l'utilise plus
-  // let polls = [
-  //   {
-  //     id: 1,
-  //     question: "Python or Javascript?",
-  //     answerA: "Python",
-  //     answerB: "Javascript",
-  //     votesA: 9,
-  //     votesB: 15
-  //   }
-  // ];
-
-  //NEW:
   const handleAdd = e => {
     console.log(e.detail);
     const newPoll = e.detail;
-    polls = [newPoll, ...polls]; //* NOTE: The issue is here with the store
+    polls = [newPoll, ...polls]; //* NOTE: Kumbuka, polls, n'existe plus ici. On va le reparer + tard.
     console.log(polls);
     activeItem = "Current Polls";
   };
@@ -43,7 +30,7 @@
   const handleVote = e => {
     const { id, option } = e.detail;
 
-    let copiedPolls = [...polls]; // Same issue as before, on l'utilise plus polls
+    let copiedPolls = [...polls]; // NOTE: Same issue here as well,
     let upVotedPoll = copiedPolls.find(currentPoll => currentPoll.id === id);
 
     if (option === "A") {
@@ -52,7 +39,7 @@
       upVotedPoll.votesB++;
     }
 
-    polls = copiedPolls;
+    polls = copiedPolls; // NOTE: and here. Nilisahau kuongeza maoni yangu hapa kwa branch iliyopita
   };
 </script>
 
