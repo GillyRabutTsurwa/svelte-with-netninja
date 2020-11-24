@@ -1,13 +1,15 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import Card from "./shared/Card.svelte";
+  import Button from "./shared/Button.svelte";
+  //NEW: Importing store. I'm doing it here, because unlike Shaun, I don't use the store in this component up to this point. He uses it earlier, for updating votes and those tings
+  import PollStore from "../store/PollStore.js";
+
   export let singlePollProp;
 
   const dispatch = createEventDispatcher();
 
-  // Reactive Values.
   $: totalVotes = singlePollProp.votesA + singlePollProp.votesB;
-  //NEW: percentage values for A & B;
   $: percentA = Math.floor((100 / totalVotes) * singlePollProp.votesA);
   $: percentB = Math.floor((100 / totalVotes) * singlePollProp.votesB);
 
@@ -16,6 +18,18 @@
       option: option,
       id: id
     });
+  };
+
+  //NEW: functionality do delete a single poll.
+  const handleDelete = id => {
+    PollStore.update(currentPolls => {
+      return currentPolls.filter(
+        currentSinglePoll => currentSinglePoll.id !== id
+      );
+    });
+    // NOTE: reminder: Even though I will keep the above method (no pun intended), based on what we've learnt, we can also do this. comment out between these two to test:
+
+    // $PollStore = $PollStore.filter(currentPoll => currentPoll.id !== id);
   };
 </script>
 
@@ -58,6 +72,12 @@
     border-left: 4px solid #45c496;
     /* background-color: rgba(69, 196, 66, 0.2); lequel est meilleur? */
   }
+
+  /* NEW: delete class. simple tings */
+  .delete {
+    margin-top: 3rem;
+    text-align: center;
+  }
 </style>
 
 <!-- NEW: -->
@@ -72,6 +92,12 @@
     <div on:click={() => handleVote('B', singlePollProp.id)} class="answer">
       <div class="percent percent-B" style="width: {percentB}%" />
       <span>{singlePollProp.answerB} ({singlePollProp.votesB})</span>
+    </div>
+    <div class="delete">
+      <!-- IMPORTANT: The on:click below has to be forwarded from the child component because this below, is not an actual HTML element. So we cannot put on:click on its own independently. No wonder it was not working -->
+      <Button flat={false} on:click={() => handleDelete(singlePollProp.id)}>
+        Delete
+      </Button>
     </div>
   </div>
 </Card>

@@ -43,10 +43,11 @@
 </style>
 
 <button
-  on:mouseenter={() => (inverse = true)}
-  on:mouseleave={() => (inverse = false)}
+  on:mouseenter={() => (inverse = !inverse)}
+  on:mouseleave={() => (inverse = !inverse)}
   class={type}
   class:flatClass={flat}
-  class:inverseClass={inverse}>
+  class:inverseClass={inverse}
+  on:click>
   <slot />
 </button>

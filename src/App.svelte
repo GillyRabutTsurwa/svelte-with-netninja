@@ -5,10 +5,16 @@
   import PollForm from "./components/PollForm.svelte";
   import PollList from "./components/PollList.svelte";
 
-  import { onMount } from "svelte";
+  //TESTING:
+  import { onMount, afterUpdate } from "svelte";
   import PollStore from "./store/PollStore.js";
 
   onMount(() => {
+    console.log($PollStore);
+  });
+
+  //TESTING:
+  afterUpdate(() => {
     console.log($PollStore);
   });
 

@@ -111,5 +111,5 @@
       <span>&check;</span>
     {/if}
   </div>
-  <Button type="secondary" flat="true">Add Poll</Button>
+  <Button type="secondary" flat={true}>Add Poll</Button>
 </form>
