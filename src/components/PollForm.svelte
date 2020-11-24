@@ -21,21 +21,21 @@
   const submitHandler = () => {
     console.log(fields);
     isValid = true;
-    // TODO: validate question
+
     if (fields.question.length < 5) {
       isValid = false;
       errors.question = "Question must be at least 5 characters long";
     } else {
       errors.question = "";
     }
-    // TODO: validate answer A
+
     if (fields.answerA.length < 1) {
       isValid = false;
       errors.answerA = "Answer must be at least 1 characters long";
     } else {
       errors.answerA = "";
     }
-    // TODO: validate answer B
+
     if (fields.answerB.length < 1) {
       isValid = false;
       errors.answerB = "Answer must be at least 1 characters long";
@@ -43,7 +43,6 @@
       errors.answerB = "";
     }
 
-    // (Eventually) add new poll is valid is true
     if (isValid) {
       console.log("isValid is true if u c this", fields);
       //NEW
