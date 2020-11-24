@@ -5,6 +5,17 @@
   import PollForm from "./components/PollForm.svelte";
   import PollList from "./components/PollList.svelte";
 
+  //TESTING:
+  import { onMount } from "svelte";
+  import PollStore from "./store/PollStore.js";
+
+  onMount(() => {
+    // Faut ajouter le $, car $PollStore !== PollStore;
+    console.log($PollStore);
+  });
+
+  //PASS: Everywhere that was polls was declared, which we're no longer using, is now replaced with $PollStore. Voici la solution. Tout marche comme désiré
+
   let items = ["Current Polls", "Add New Poll"];
   let activeItem = "Current Polls";
 
@@ -24,8 +35,8 @@
   const handleAdd = e => {
     console.log(e.detail);
     const newPoll = e.detail;
-    polls = [newPoll, ...polls]; //* NOTE: The issue is here with the store
-    console.log(polls);
+    $PollStore = [newPoll, ...$PollStore]; //* NOTE: The issue is here with the store
+    // console.log(polls);
     activeItem = "Current Polls";
   };
 
@@ -43,7 +54,7 @@
   const handleVote = e => {
     const { id, option } = e.detail;
 
-    let copiedPolls = [...polls]; // Same issue as before, on l'utilise plus polls
+    let copiedPolls = [...$PollStore]; // Same issue as before, on l'utilise plus polls
     let upVotedPoll = copiedPolls.find(currentPoll => currentPoll.id === id);
 
     if (option === "A") {
@@ -52,7 +63,7 @@
       upVotedPoll.votesB++;
     }
 
-    polls = copiedPolls;
+    $PollStore = copiedPolls;
   };
 </script>
 
